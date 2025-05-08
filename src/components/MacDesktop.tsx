@@ -126,6 +126,50 @@ const MacDesktop: React.FC = () => {
 
   return (
     <div className="crt-effect min-h-screen bg-mac-blue relative overflow-hidden">
+      {/* Animated desktop background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Stars */}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-twinkle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 3 + 1}px`,
+              height: `${Math.random() * 3 + 1}px`,
+              backgroundColor: 'white',
+              borderRadius: '50%',
+              opacity: Math.random() * 0.7 + 0.3,
+              animationDuration: `${Math.random() * 3 + 2}s`,
+              animationDelay: `${Math.random() * 2}s`,
+            }}
+          />
+        ))}
+        
+        {/* Floating text bubbles in different languages */}
+        <div className="absolute text-xs text-white opacity-30 animate-float-slow"
+             style={{ left: '10%', top: '15%' }}>
+          愛してる
+        </div>
+        <div className="absolute text-xs text-white opacity-30 animate-float-slow"
+             style={{ left: '80%', top: '25%', animationDelay: '1s' }}>
+          我爱你
+        </div>
+        <div className="absolute text-xs text-white opacity-30 animate-float-slow"
+             style={{ left: '35%', top: '75%', animationDelay: '1.5s' }}>
+          أحبك
+        </div>
+        <div className="absolute text-xs text-white opacity-30 animate-float-slow"
+             style={{ left: '70%', top: '65%', animationDelay: '2s' }}>
+          Ich liebe dich
+        </div>
+        <div className="absolute text-xs text-white opacity-30 animate-float-slow"
+             style={{ left: '25%', top: '40%', animationDelay: '2.5s' }}>
+          I love you
+        </div>
+      </div>
+
       {/* Desktop icons */}
       {icons.map((icon) => {
         // Only show the Special Surprise icon if all keys are collected

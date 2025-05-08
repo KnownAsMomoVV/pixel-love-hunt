@@ -87,7 +87,18 @@ export const generateIcons = (
           <h2 className="pixel-font text-xl mb-4">Music Player</h2>
           <div className="crt-border p-3 mb-4">
             <div className="font-bold mb-2">Now Playing</div>
-            <div className="text-mac-blue">Our Song</div>
+            <div className="flex items-center">
+              <div className="w-16 h-16 bg-mac-blue bg-opacity-30 mr-3 rounded overflow-hidden flex items-center justify-center">
+                <div className="text-2xl animate-pulse">💙</div>
+              </div>
+              <div>
+                <div className="text-mac-blue font-bold">Our Song</div>
+                <div className="text-xs">Special Album</div>
+                <div className="mt-2 w-32 h-1 bg-gray-300 rounded-full overflow-hidden">
+                  <div className="h-full bg-mac-blue animate-progress-bar" style={{width: '45%'}}></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="flex justify-center space-x-4">
             <button className="pixel-button bg-mac-white hover:bg-mac-blue hover:text-mac-white transition-colors">
@@ -118,13 +129,28 @@ export const generateIcons = (
             <div className="h-40 bg-mac-black bg-opacity-20 flex items-center justify-center overflow-hidden relative">
               <div className="absolute inset-0 animate-photo-carousel flex">
                 <div className="photo-slide min-w-full flex items-center justify-center">
-                  <span className="text-lg animate-sparkle">This is us! 💙</span>
+                  <div className="w-32 h-32 border-4 border-mac-blue transform rotate-3 flex items-center justify-center animate-float">
+                    <div className="text-lg animate-sparkle flex flex-col items-center">
+                      <div className="text-5xl mb-2">❤️</div>
+                      <div className="text-xs">This is us!</div>
+                    </div>
+                  </div>
                 </div>
                 <div className="photo-slide min-w-full flex items-center justify-center">
-                  <span className="text-lg animate-sparkle">Look at us! 💙</span>
+                  <div className="w-32 h-32 border-4 border-yellow-400 transform -rotate-3 flex items-center justify-center animate-float">
+                    <div className="text-lg animate-sparkle flex flex-col items-center">
+                      <div className="text-5xl mb-2">🥰</div>
+                      <div className="text-xs">Look at us!</div>
+                    </div>
+                  </div>
                 </div>
                 <div className="photo-slide min-w-full flex items-center justify-center">
-                  <span className="text-lg animate-sparkle">Together forever! 💙</span>
+                  <div className="w-32 h-32 border-4 border-pink-400 transform rotate-6 flex items-center justify-center animate-float">
+                    <div className="text-lg animate-sparkle flex flex-col items-center">
+                      <div className="text-5xl mb-2">💖</div>
+                      <div className="text-xs">Forever!</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -133,15 +159,35 @@ export const generateIcons = (
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse">Photo 1.jpg</div>
-            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-150">Photo 2.jpg</div>
-            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-300">Photo 3.jpg</div>
-            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-450">Photo 4.jpg</div>
+            <div className="crt-border p-2 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-blue-100 mr-2 flex items-center justify-center text-xs">📷</div>
+                <span>Beach Day.jpg</span>
+              </div>
+            </div>
+            <div className="crt-border p-2 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-blue-100 mr-2 flex items-center justify-center text-xs">📷</div>
+                <span>Dinner Date.jpg</span>
+              </div>
+            </div>
+            <div className="crt-border p-2 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-blue-100 mr-2 flex items-center justify-center text-xs">📷</div>
+                <span>First Trip.jpg</span>
+              </div>
+            </div>
+            <div className="crt-border p-2 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-blue-100 mr-2 flex items-center justify-center text-xs">📷</div>
+                <span>Special Day.jpg</span>
+              </div>
+            </div>
           </div>
         </div>,
         "Our Photos",
         400,
-        320
+        350
       )
     },
     {
@@ -159,12 +205,26 @@ export const generateIcons = (
               <div className="mt-4 bg-mac-black bg-opacity-20 p-4">
                 <p>Many more happy anniversaries to come!</p>
               </div>
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                <div className="bg-mac-blue bg-opacity-10 p-2 flex items-center justify-center">
+                  <div className="text-xs">愛してる</div>
+                </div>
+                <div className="bg-mac-blue bg-opacity-10 p-2 flex items-center justify-center">
+                  <div className="text-xs">我爱你</div>
+                </div>
+                <div className="bg-mac-blue bg-opacity-10 p-2 flex items-center justify-center">
+                  <div className="text-xs">أحبك</div>
+                </div>
+              </div>
+              <div className="mt-2 bg-mac-blue bg-opacity-10 p-2 flex items-center justify-center">
+                <div className="text-xs">Ich liebe dich</div>
+              </div>
             </div>
           </div>
         </div>,
         "Anniversary",
         350,
-        300
+        350
       )
     },
     {
@@ -209,7 +269,7 @@ export const generateIcons = (
                  )}>
               <div className="font-bold mb-1">Snake</div>
               <div className="bg-mac-blue bg-opacity-20 h-16 flex items-center justify-center">
-                <span className="text-xs">🐍</span>
+                <span className="text-lg">🐍</span>
               </div>
             </div>
             <div className="crt-border p-2 text-center cursor-pointer hover:bg-mac-blue hover:bg-opacity-10 transition-colors"
