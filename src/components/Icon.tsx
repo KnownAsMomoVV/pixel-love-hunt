@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { IconType } from '../contexts/DesktopContext';
 import { Calendar, Folder, Monitor, File, Settings, Music, FileText, Gamepad } from 'lucide-react';
 
@@ -8,6 +8,57 @@ interface IconProps extends IconType {
 }
 
 const Icon: React.FC<IconProps> = ({ id, name, icon, position, action, className }) => {
+  const [pos, setPos] = useState(position);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragOffset({
+      x: e.clientX - pos.x,
+      y: e.clientY - pos.y
+    });
+    e.stopPropagation();
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setPos({
+        x: e.clientX - dragOffset.x,
+        y: e.clientY - dragOffset.y
+      });
+      e.preventDefault();
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Use useEffect to add and remove event listeners for mouse move and up
+  React.useEffect(() => {
+    if (isDragging) {
+      const onMouseMove = (e: MouseEvent) => {
+        setPos({
+          x: e.clientX - dragOffset.x,
+          y: e.clientY - dragOffset.y
+        });
+      };
+      
+      const onMouseUp = () => {
+        setIsDragging(false);
+      };
+      
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      
+      return () => {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      };
+    }
+  }, [isDragging, dragOffset]);
+  
   const renderIcon = () => {
     switch (icon) {
       case 'folder':
@@ -65,13 +116,15 @@ const Icon: React.FC<IconProps> = ({ id, name, icon, position, action, className
 
   return (
     <div
-      className={`mac-icon hover:mac-icon-hover ${className || ''}`}
+      className={`mac-icon hover:mac-icon-hover ${className || ''} ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       style={{
         position: 'absolute',
-        left: `${position.x}px`,
-        top: `${position.y}px`
+        left: `${pos.x}px`,
+        top: `${pos.y}px`,
+        zIndex: isDragging ? 100 : 1
       }}
-      onClick={action}
+      onClick={!isDragging ? action : undefined}
+      onMouseDown={handleMouseDown}
     >
       <div className="mac-icon-img flex items-center justify-center">
         {renderIcon()}

@@ -1,6 +1,7 @@
 
 import React, { useRef, useState, useEffect, ReactNode } from 'react';
 import { useDesktop, WindowType } from '../contexts/DesktopContext';
+import Vault from './Vault';
 
 interface WindowProps extends WindowType {}
 
@@ -14,7 +15,7 @@ const Window: React.FC<WindowProps> = ({
   zIndex, 
   minimized 
 }) => {
-  const { closeWindow, minimizeWindow, bringToFront, activeWindowId } = useDesktop();
+  const { closeWindow, minimizeWindow, bringToFront, activeWindowId, keys, setShowReward } = useDesktop();
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [windowPosition, setWindowPosition] = useState(position);
@@ -77,6 +78,17 @@ const Window: React.FC<WindowProps> = ({
   const isVault = id === "vault1" || id === "vault2" || id === "vault3";
   let vaultContent: ReactNode = content;
   
+  // Check if this is the reward window and if all keys are collected
+  const isReward = id === "reward";
+  const allKeysCollected = keys.vault1 && keys.vault2 && keys.vault3;
+  
+  // Update showReward status whenever keys change
+  useEffect(() => {
+    if (allKeysCollected) {
+      setShowReward(true);
+    }
+  }, [keys, setShowReward]);
+  
   if (isVault) {
     switch (id) {
       case "vault1":
@@ -128,6 +140,7 @@ const Window: React.FC<WindowProps> = ({
                 <h3 className="text-xl mb-2">Vault #2</h3>
                 <p className="mb-4">To unlock this vault, answer the question:</p>
                 <p className="mb-2 font-bold">"In what language did we confess?"</p>
+                <Vault vaultId="vault2" question="In what language did we confess?" correctAnswer="JAPANESE" />
               </div>
             </div>
           </div>
@@ -161,6 +174,7 @@ const Window: React.FC<WindowProps> = ({
                 <h3 className="text-xl mb-2">Vault #3</h3>
                 <p className="mb-4">To unlock this vault, answer the question:</p>
                 <p className="mb-2 font-bold">"When did we first meet in Europe?"</p>
+                <Vault vaultId="vault3" question="When did we first meet in Europe?" correctAnswer="SEPTEMBER" />
               </div>
             </div>
           </div>
@@ -171,6 +185,75 @@ const Window: React.FC<WindowProps> = ({
 
   if (!isOpen || minimized) {
     return null;
+  }
+  
+  // Prevent opening reward window if not all keys collected
+  if (isReward && !allKeysCollected) {
+    return (
+      <div
+        ref={windowRef}
+        className="mac-window absolute animate-pixel-fade-in"
+        style={{
+          left: windowPosition.x,
+          top: windowPosition.y,
+          width: size.width,
+          height: size.height,
+          zIndex
+        }}
+      >
+        <div 
+          className="mac-window-header"
+          onMouseDown={handleDragStart}
+        >
+          <div className="flex space-x-2">
+            <div 
+              className="w-3 h-3 rounded-full bg-red-500 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeWindow(id);
+              }}
+            ></div>
+            <div 
+              className="w-3 h-3 rounded-full bg-yellow-500 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                minimizeWindow(id);
+              }}
+            ></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="text-xs font-bold">{title}</span>
+          </div>
+        </div>
+        <div className="mac-window-body p-4 flex flex-col items-center justify-center">
+          <div className="text-xl mb-4 text-center">🔒 Locked</div>
+          <div className="text-center mb-4">
+            You need to collect all three keys to unlock this special surprise!
+          </div>
+          <div className="flex space-x-4 mb-4">
+            <div className={`flex flex-col items-center ${keys.vault1 ? 'text-mac-blue' : 'text-gray-400'}`}>
+              <div className="text-2xl mb-1">🔑</div>
+              <div className="text-xs">Key 1</div>
+            </div>
+            <div className={`flex flex-col items-center ${keys.vault2 ? 'text-mac-blue' : 'text-gray-400'}`}>
+              <div className="text-2xl mb-1">🔑</div>
+              <div className="text-xs">Key 2</div>
+            </div>
+            <div className={`flex flex-col items-center ${keys.vault3 ? 'text-mac-blue' : 'text-gray-400'}`}>
+              <div className="text-2xl mb-1">🔑</div>
+              <div className="text-xs">Key 3</div>
+            </div>
+          </div>
+          <button 
+            className="pixel-button bg-mac-blue text-white"
+            onClick={() => closeWindow(id)}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (

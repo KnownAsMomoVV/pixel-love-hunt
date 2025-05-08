@@ -4,7 +4,6 @@ import { useDesktop, WindowType } from '../contexts/DesktopContext';
 import Icon from './Icon';
 import Window from './Window';
 import TaskBar from './TaskBar';
-import Vault from './Vault';
 import RewardPage from './RewardPage';
 import { generateIcons, initialWindows } from '../data/desktopItems';
 
@@ -15,7 +14,9 @@ const MacDesktop: React.FC = () => {
     windows, 
     setWindows, 
     activeWindowId,
-    showReward
+    keys,
+    showReward,
+    setShowReward
   } = useDesktop();
   const [initialized, setInitialized] = useState(false);
   
@@ -26,7 +27,7 @@ const MacDesktop: React.FC = () => {
     // Create a window when clicking on an icon
     const createWindow = (content: React.ReactNode, title: string, width: number, height: number) => {
       const newWindow: WindowType = {
-        id: title.toLowerCase().replace(/\s+/g, '-'),
+        id: typeof content === 'string' ? content : title.toLowerCase().replace(/\s+/g, '-'),
         title,
         content,
         position: {
@@ -59,7 +60,7 @@ const MacDesktop: React.FC = () => {
       {
         id: 'vault1',
         title: 'Travel Memories',
-        content: <Vault vaultId="vault1" question="Where did we confess?" correctAnswer="TAIPEI 101" />,
+        content: <div>Placeholder for Vault 1</div>,
         position: { x: 150, y: 120 },
         size: { width: 400, height: 350 },
         isOpen: false,
@@ -69,7 +70,7 @@ const MacDesktop: React.FC = () => {
       {
         id: 'vault2',
         title: 'System Settings',
-        content: <Vault vaultId="vault2" question="In what language did we confess?" correctAnswer="JAPANESE" />,
+        content: <div>Placeholder for Vault 2</div>,
         position: { x: 180, y: 150 },
         size: { width: 400, height: 350 },
         isOpen: false,
@@ -79,7 +80,7 @@ const MacDesktop: React.FC = () => {
       {
         id: 'vault3',
         title: 'Calendar',
-        content: <Vault vaultId="vault3" question="When did we first meet in Europe?" correctAnswer="SEPTEMBER" />,
+        content: <div>Placeholder for Vault 3</div>,
         position: { x: 210, y: 180 },
         size: { width: 400, height: 350 },
         isOpen: false,
@@ -102,6 +103,13 @@ const MacDesktop: React.FC = () => {
     setInitialized(true);
   }, [initialized, setIcons, setWindows, windows.length]);
 
+  // Check if all keys have been collected
+  useEffect(() => {
+    if (keys.vault1 && keys.vault2 && keys.vault3) {
+      setShowReward(true);
+    }
+  }, [keys, setShowReward]);
+
   // Handle document clicks to close menus
   useEffect(() => {
     const handleDocumentClick = (e: MouseEvent) => {
@@ -119,15 +127,46 @@ const MacDesktop: React.FC = () => {
   return (
     <div className="crt-effect min-h-screen bg-mac-blue relative overflow-hidden">
       {/* Desktop icons */}
-      {icons.map((icon) => (
-        <Icon key={icon.id} {...icon} />
-      ))}
+      {icons.map((icon) => {
+        // Only show the Special Surprise icon if all keys are collected
+        if (icon.id === 'end-vault' && !showReward) {
+          return null;
+        }
+        return <Icon key={icon.id} {...icon} />;
+      })}
 
       {/* Key icons that appear as vaults are unlocked */}
       <div className="fixed bottom-10 right-10 flex space-x-4">
-        {windows.find(w => w.id === 'vault1')?.isOpen === false && (
-          <div className={`${windows.find(w => w.id === 'vault1') ? 'opacity-100' : 'opacity-0'} transition-opacity`}>
-            {/* This is a placeholder for where key icons could appear */}
+        {keys.vault1 && (
+          <div className="animate-fade-in">
+            <div className="mac-icon">
+              <div className="mac-icon-img flex items-center justify-center">
+                <div className="text-2xl animate-pulse">🔑</div>
+              </div>
+              <div className="mac-icon-label pixel-font">Key #1</div>
+            </div>
+          </div>
+        )}
+        
+        {keys.vault2 && (
+          <div className="animate-fade-in">
+            <div className="mac-icon">
+              <div className="mac-icon-img flex items-center justify-center">
+                <div className="text-2xl animate-pulse">🔑</div>
+              </div>
+              <div className="mac-icon-label pixel-font">Key #2</div>
+            </div>
+          </div>
+        )}
+        
+        {keys.vault3 && (
+          <div className="animate-fade-in">
+            <div className="mac-icon">
+              <div className="mac-icon-img flex items-center justify-center">
+                <div className="text-2xl animate-pulse">🔑</div>
+              </div>
+              <div className="mac-icon-label pixel-font">Key #3</div>
+            </div>
           </div>
         )}
       </div>

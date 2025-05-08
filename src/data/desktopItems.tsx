@@ -1,9 +1,11 @@
 
 import React, { ReactNode } from "react";
 import { IconType, WindowType } from "../contexts/DesktopContext";
+import SnakeGame from "../components/games/SnakeGame";
+import PacmanGame from "../components/games/PacmanGame";
 
 export const generateIcons = (
-  createWindow: (content: ReactNode, title: string, width: number, height: number) => void
+  createWindow: (content: ReactNode, title: string, width: number, height: number) => string
 ): IconType[] => {
   return [
     {
@@ -113,15 +115,28 @@ export const generateIcons = (
         <div className="p-4">
           <h2 className="pixel-font text-xl mb-4">Our Photos</h2>
           <div className="crt-border p-2 mb-4">
-            <div className="h-40 bg-mac-black bg-opacity-20 flex items-center justify-center">
-              <span className="text-lg">This is us! 💙</span>
+            <div className="h-40 bg-mac-black bg-opacity-20 flex items-center justify-center overflow-hidden relative">
+              <div className="absolute inset-0 animate-photo-carousel flex">
+                <div className="photo-slide min-w-full flex items-center justify-center">
+                  <span className="text-lg animate-sparkle">This is us! 💙</span>
+                </div>
+                <div className="photo-slide min-w-full flex items-center justify-center">
+                  <span className="text-lg animate-sparkle">Look at us! 💙</span>
+                </div>
+                <div className="photo-slide min-w-full flex items-center justify-center">
+                  <span className="text-lg animate-sparkle">Together forever! 💙</span>
+                </div>
+              </div>
+
+              <div className="absolute top-2 right-2 text-mac-blue animate-sparkle">✨</div>
+              <div className="absolute bottom-2 left-2 text-mac-blue animate-sparkle delay-300">✨</div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div className="crt-border p-1 bg-gray-200">Photo 1.jpg</div>
-            <div className="crt-border p-1 bg-gray-200">Photo 2.jpg</div>
-            <div className="crt-border p-1 bg-gray-200">Photo 3.jpg</div>
-            <div className="crt-border p-1 bg-gray-200">Photo 4.jpg</div>
+            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse">Photo 1.jpg</div>
+            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-150">Photo 2.jpg</div>
+            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-300">Photo 3.jpg</div>
+            <div className="crt-border p-1 bg-gray-200 hover:bg-mac-blue hover:bg-opacity-20 transition-colors cursor-pointer animate-pulse delay-450">Photo 4.jpg</div>
           </div>
         </div>,
         "Our Photos",
@@ -131,7 +146,7 @@ export const generateIcons = (
     },
     {
       id: "anniversary",
-      name: "Anniversary",
+      name: "Special Date",
       icon: "calendar-heart",
       position: { x: 150, y: 250 },
       action: () => createWindow(
@@ -183,16 +198,32 @@ export const generateIcons = (
         <div className="p-4">
           <h2 className="pixel-font text-xl mb-4">Games</h2>
           <div className="grid grid-cols-2 gap-3">
-            <div className="crt-border p-2 text-center">
-              <div className="font-bold mb-1">Pixelate</div>
+            <div className="crt-border p-2 text-center cursor-pointer hover:bg-mac-blue hover:bg-opacity-10 transition-colors"
+                 onClick={() => createWindow(
+                   <div className="p-2">
+                     <SnakeGame />
+                   </div>,
+                   "Snake Game",
+                   400,
+                   400
+                 )}>
+              <div className="font-bold mb-1">Snake</div>
               <div className="bg-mac-blue bg-opacity-20 h-16 flex items-center justify-center">
-                Game 1
+                <span className="text-xs">🐍</span>
               </div>
             </div>
-            <div className="crt-border p-2 text-center">
-              <div className="font-bold mb-1">Memory</div>
+            <div className="crt-border p-2 text-center cursor-pointer hover:bg-mac-blue hover:bg-opacity-10 transition-colors"
+                 onClick={() => createWindow(
+                   <div className="p-2">
+                     <PacmanGame />
+                   </div>,
+                   "Pacman Game",
+                   400,
+                   400
+                 )}>
+              <div className="font-bold mb-1">Pacman</div>
               <div className="bg-mac-blue bg-opacity-20 h-16 flex items-center justify-center">
-                Game 2
+                <span className="text-lg">🎮</span>
               </div>
             </div>
           </div>
