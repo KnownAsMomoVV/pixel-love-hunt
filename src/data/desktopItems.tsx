@@ -1,6 +1,6 @@
 
+import React, { ReactNode } from "react";
 import { IconType, WindowType } from "../contexts/DesktopContext";
-import { ReactNode } from "react";
 
 export const generateIcons = (
   createWindow: (content: ReactNode, title: string, width: number, height: number) => void
