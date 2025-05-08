@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,22 +36,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -79,14 +66,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -94,8 +73,143 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'VT323', monospace;
+  }
+}
+
+@layer components {
+  .pixel-font {
+    font-family: 'VT323', monospace;
+  }
+  
+  .pixel-font-bold {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: -1px;
+  }
+
+  .crt-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crt-effect::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .crt-effect::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 11;
+    animation: scanline 8s linear infinite;
+  }
+
+  .crt-border {
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    border-right-color: #333333;
+    border-bottom-color: #333333;
+  }
+
+  .crt-border-inverted {
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #333333;
+    border-left-color: #333333;
+    border-right-color: #CCCCCC;
+    border-bottom-color: #CCCCCC;
+  }
+
+  .mac-window {
+    @apply bg-mac-white crt-border rounded-none;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .mac-window-header {
+    @apply bg-mac-black text-mac-white flex items-center justify-between p-1 relative;
+    height: 20px;
+  }
+
+  .mac-window-body {
+    @apply p-2 overflow-auto;
+    height: calc(100% - 20px);
+  }
+
+  .mac-icon {
+    @apply flex flex-col items-center justify-center cursor-pointer p-1 transition-all;
+    width: 70px;
+    height: 80px;
+  }
+
+  .mac-icon:hover {
+    @apply bg-mac-blue bg-opacity-20;
+  }
+
+  .mac-icon.active {
+    @apply bg-mac-blue bg-opacity-30;
+  }
+
+  .mac-icon-img {
+    @apply bg-mac-white crt-border mb-2;
+    width: 42px;
+    height: 42px;
+    padding: 2px;
+  }
+
+  .mac-icon-label {
+    @apply text-xs text-center w-full;
+    max-width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mac-taskbar {
+    @apply bg-mac-white flex items-center justify-between crt-border-inverted;
+    height: 23px;
+  }
+
+  .pixel-input {
+    @apply bg-mac-white crt-border-inverted p-1 text-black focus:outline-none focus:ring-1 focus:ring-mac-blue;
+    font-family: 'VT323', monospace;
+  }
+
+  .pixel-button {
+    @apply cursor-pointer crt-border px-2 py-0.5 transition-all;
+    font-family: 'VT323', monospace;
+  }
+
+  .pixel-button:active {
+    @apply crt-border-inverted;
   }
 }
