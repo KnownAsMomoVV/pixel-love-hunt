@@ -73,6 +73,168 @@ export const generateIcons = (
         350,
         200
       )
+    },
+    // New icons for a more lively desktop
+    {
+      id: "music-player",
+      name: "Music Player",
+      icon: "music",
+      position: { x: 150, y: 50 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Music Player</h2>
+          <div className="crt-border p-3 mb-4">
+            <div className="font-bold mb-2">Now Playing</div>
+            <div className="text-mac-blue">Our Song</div>
+          </div>
+          <div className="flex justify-center space-x-4">
+            <button className="pixel-button bg-mac-white hover:bg-mac-blue hover:text-mac-white transition-colors">
+              ⏮ Previous
+            </button>
+            <button className="pixel-button bg-mac-white hover:bg-mac-blue hover:text-mac-white transition-colors">
+              ▶️ Play
+            </button>
+            <button className="pixel-button bg-mac-white hover:bg-mac-blue hover:text-mac-white transition-colors">
+              ⏭ Next
+            </button>
+          </div>
+        </div>,
+        "Music Player",
+        400,
+        300
+      )
+    },
+    {
+      id: "photo-frame",
+      name: "Our Photos",
+      icon: "folder-heart",
+      position: { x: 150, y: 150 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Our Photos</h2>
+          <div className="crt-border p-2 mb-4">
+            <div className="h-40 bg-mac-black bg-opacity-20 flex items-center justify-center">
+              <span className="text-lg">This is us! 💙</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="crt-border p-1 bg-gray-200">Photo 1.jpg</div>
+            <div className="crt-border p-1 bg-gray-200">Photo 2.jpg</div>
+            <div className="crt-border p-1 bg-gray-200">Photo 3.jpg</div>
+            <div className="crt-border p-1 bg-gray-200">Photo 4.jpg</div>
+          </div>
+        </div>,
+        "Our Photos",
+        400,
+        320
+      )
+    },
+    {
+      id: "anniversary",
+      name: "Anniversary",
+      icon: "calendar-heart",
+      position: { x: 150, y: 250 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Special Date</h2>
+          <div className="crt-border p-3">
+            <div className="text-center">
+              <h3 className="text-xl font-bold text-mac-blue">13 May</h3>
+              <p className="mt-2">Our special day! 💙</p>
+              <div className="mt-4 bg-mac-black bg-opacity-20 p-4">
+                <p>Many more happy anniversaries to come!</p>
+              </div>
+            </div>
+          </div>
+        </div>,
+        "Anniversary",
+        350,
+        300
+      )
+    },
+    {
+      id: "notes",
+      name: "Notes",
+      icon: "file-text",
+      position: { x: 150, y: 350 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Notes</h2>
+          <div className="crt-border p-3 bg-mac-white">
+            <p className="mb-2">To-Do List:</p>
+            <ul className="list-disc pl-5">
+              <li>Find all the hidden keys</li>
+              <li>Unlock the special surprise</li>
+              <li>Remember our special moments</li>
+            </ul>
+          </div>
+        </div>,
+        "Notes",
+        350,
+        300
+      )
+    },
+    {
+      id: "games",
+      name: "Games",
+      icon: "gamepad",
+      position: { x: 250, y: 50 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Games</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="crt-border p-2 text-center">
+              <div className="font-bold mb-1">Pixelate</div>
+              <div className="bg-mac-blue bg-opacity-20 h-16 flex items-center justify-center">
+                Game 1
+              </div>
+            </div>
+            <div className="crt-border p-2 text-center">
+              <div className="font-bold mb-1">Memory</div>
+              <div className="bg-mac-blue bg-opacity-20 h-16 flex items-center justify-center">
+                Game 2
+              </div>
+            </div>
+          </div>
+        </div>,
+        "Games",
+        400,
+        300
+      )
+    },
+    {
+      id: "documents",
+      name: "Documents",
+      icon: "folder",
+      position: { x: 250, y: 150 },
+      action: () => createWindow(
+        <div className="p-4">
+          <h2 className="pixel-font text-xl mb-4">Documents</h2>
+          <div className="crt-border p-2 mb-4">
+            <div className="grid grid-cols-1 gap-2">
+              <div className="crt-border p-1 bg-gray-200">Journal.txt</div>
+              <div className="crt-border p-1 bg-gray-200">Love_Letter.doc</div>
+              <div className="crt-border p-1 bg-gray-200">Plans.doc</div>
+              <div className="crt-border p-1 bg-gray-200">Memories.txt</div>
+            </div>
+          </div>
+        </div>,
+        "Documents",
+        400,
+        300
+      )
+    },
+    {
+      id: "end-vault",
+      name: "Special Surprise",
+      icon: "special",
+      position: { x: 250, y: 250 },
+      action: () => createWindow(
+        "reward",
+        "Special Surprise",
+        500,
+        400
+      )
     }
   ];
 };

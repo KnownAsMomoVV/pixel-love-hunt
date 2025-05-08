@@ -34,7 +34,7 @@ const Vault: React.FC<VaultProps> = ({ vaultId, question, correctAnswer }) => {
       if (allKeysCollected) {
         toast({
           title: "All Vaults Unlocked!",
-          description: "Check your desktop for a surprise!",
+          description: "Check your desktop for a special surprise!",
           duration: 5000,
         });
       }
@@ -54,7 +54,7 @@ const Vault: React.FC<VaultProps> = ({ vaultId, question, correctAnswer }) => {
     <div className="h-full">
       {unlocked ? (
         <div className="flex flex-col items-center justify-center h-full">
-          <div className="text-3xl mb-4 text-mac-blue">🔑</div>
+          <div className="text-3xl mb-4 text-mac-blue animate-heart-pulse">🔑</div>
           <h3 className="text-xl mb-4 text-center">Key Collected!</h3>
           <div className="crt-border p-4 bg-mac-blue bg-opacity-20 text-center">
             <p>You've successfully unlocked this vault!</p>

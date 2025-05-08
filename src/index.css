@@ -82,6 +82,66 @@
   }
 }
 
+@keyframes pixel-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heart-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes firework {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+}
+
 @layer components {
   .pixel-font {
     font-family: 'VT323', monospace;
@@ -179,11 +239,17 @@
     @apply bg-mac-blue bg-opacity-30;
   }
 
+  .mac-icon-hover:hover .mac-icon-img {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }
+
   .mac-icon-img {
     @apply bg-mac-white crt-border mb-2;
     width: 42px;
     height: 42px;
     padding: 2px;
+    transition: transform 0.2s ease;
   }
 
   .mac-icon-label {
@@ -199,6 +265,17 @@
     height: 23px;
   }
 
+  .mac-dropdown {
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    border-right-color: #333333;
+    border-bottom-color: #333333;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    animation: pixel-fade-in 0.2s ease-out;
+  }
+
   .pixel-input {
     @apply bg-mac-white crt-border-inverted p-1 text-black focus:outline-none focus:ring-1 focus:ring-mac-blue;
     font-family: 'VT323', monospace;
@@ -211,5 +288,33 @@
 
   .pixel-button:active {
     @apply crt-border-inverted;
+  }
+
+  .animate-pixel-fade-in {
+    animation: pixel-fade-in 0.3s ease-out;
+  }
+
+  .animate-heart-pulse {
+    animation: heart-pulse 2s infinite ease-in-out;
+  }
+
+  .animate-sparkle {
+    animation: sparkle 3s infinite ease-in-out;
+  }
+
+  .animate-firework {
+    animation: firework 2s infinite ease-in-out;
+  }
+
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .delay-700 {
+    animation-delay: 0.7s;
   }
 }

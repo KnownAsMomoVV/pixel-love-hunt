@@ -80,7 +80,7 @@ const TaskBar: React.FC = () => {
         </div>
         
         <div 
-          className="px-2 cursor-pointer"
+          className="px-2 cursor-pointer relative"
           onClick={() => handleMenuClick('file')}
         >
           File
@@ -95,7 +95,7 @@ const TaskBar: React.FC = () => {
         </div>
         
         <div 
-          className="px-2 cursor-pointer"
+          className="px-2 cursor-pointer relative"
           onClick={() => handleMenuClick('edit')}
         >
           Edit
@@ -110,14 +110,14 @@ const TaskBar: React.FC = () => {
         </div>
         
         <div 
-          className="px-2 cursor-pointer"
+          className="px-2 cursor-pointer relative"
           onClick={() => handleMenuClick('help')}
         >
           Help
           
           {menuOpen && activeMenu === 'help' && (
             <div className="mac-dropdown absolute bottom-full left-0 mb-1 w-48 crt-border bg-mac-white shadow-lg animate-pixel-fade-in z-10">
-              <div className="p-2">Search</div>
+              <div className="p-2 border-b border-mac-lightGray">Search</div>
               <div className="p-2">About</div>
             </div>
           )}

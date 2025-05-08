@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { IconType } from '../contexts/DesktopContext';
-import { Calendar, Folder, Monitor, File, Settings } from 'lucide-react';
+import { Calendar, Folder, Monitor, File, Settings, Music, FileText, Gamepad } from 'lucide-react';
 
 interface IconProps extends IconType {
   className?: string;
@@ -14,12 +14,32 @@ const Icon: React.FC<IconProps> = ({ id, name, icon, position, action, className
         return <Folder className="w-8 h-8 text-mac-blue" />;
       case 'calendar':
         return <Calendar className="w-8 h-8 text-mac-blue" />;
+      case 'calendar-heart':
+        return (
+          <div className="w-8 h-8 flex items-center justify-center">
+            <Calendar className="w-8 h-8 text-mac-blue" />
+            <div className="absolute text-xs font-bold text-mac-blue">13</div>
+          </div>
+        );
       case 'computer':
         return <Monitor className="w-8 h-8 text-mac-blue" />;
       case 'file':
         return <File className="w-8 h-8 text-mac-blue" />;
+      case 'file-text':
+        return <FileText className="w-8 h-8 text-mac-blue" />;
       case 'settings':
         return <Settings className="w-8 h-8 text-mac-blue" />;
+      case 'music':
+        return <Music className="w-8 h-8 text-mac-blue" />;
+      case 'gamepad':
+        return <Gamepad className="w-8 h-8 text-mac-blue" />;
+      case 'folder-heart':
+        return (
+          <div className="w-8 h-8 flex items-center justify-center">
+            <Folder className="w-8 h-8 text-mac-blue" />
+            <div className="absolute text-xs">💙</div>
+          </div>
+        );
       case 'trash':
         return (
           <div className="w-8 h-8 flex items-center justify-center">
@@ -45,7 +65,7 @@ const Icon: React.FC<IconProps> = ({ id, name, icon, position, action, className
 
   return (
     <div
-      className={`mac-icon ${className || ''}`}
+      className={`mac-icon hover:mac-icon-hover ${className || ''}`}
       style={{
         position: 'absolute',
         left: `${position.x}px`,

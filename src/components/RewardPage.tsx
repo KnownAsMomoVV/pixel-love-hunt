@@ -20,6 +20,16 @@ const RewardPage: React.FC = () => {
             <div className="absolute bottom-4 left-4 text-mac-blue animate-sparkle delay-300">💙</div>
             <div className="absolute top-4 left-4 text-mac-blue animate-sparkle delay-700">💙</div>
             <div className="absolute bottom-4 right-4 text-mac-blue animate-sparkle delay-500">💙</div>
+            
+            {/* Animated stars */}
+            <div className="absolute top-8 right-10 text-yellow-400 animate-sparkle delay-200">✨</div>
+            <div className="absolute bottom-8 left-10 text-yellow-400 animate-sparkle delay-400">✨</div>
+            <div className="absolute top-20 left-20 text-yellow-400 animate-sparkle delay-600">✨</div>
+            <div className="absolute bottom-12 right-12 text-yellow-400 animate-sparkle">✨</div>
+            
+            {/* Animated fireworks */}
+            <div className="absolute top-8 left-8 text-pink-400 animate-firework">🎆</div>
+            <div className="absolute bottom-8 right-8 text-green-400 animate-firework delay-500">🎆</div>
           </div>
         </div>
       </div>

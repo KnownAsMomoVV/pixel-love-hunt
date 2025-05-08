@@ -123,6 +123,15 @@ const MacDesktop: React.FC = () => {
         <Icon key={icon.id} {...icon} />
       ))}
 
+      {/* Key icons that appear as vaults are unlocked */}
+      <div className="fixed bottom-10 right-10 flex space-x-4">
+        {windows.find(w => w.id === 'vault1')?.isOpen === false && (
+          <div className={`${windows.find(w => w.id === 'vault1') ? 'opacity-100' : 'opacity-0'} transition-opacity`}>
+            {/* This is a placeholder for where key icons could appear */}
+          </div>
+        )}
+      </div>
+
       {/* Special surprise icon that appears after all vaults are unlocked */}
       {showReward && (
         <Icon
