@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDesktop } from '../contexts/DesktopContext';
 import { toast } from '@/components/ui/use-toast';
 
@@ -15,18 +15,8 @@ const Vault: React.FC<VaultProps> = ({ vaultId, question, correctAnswer }) => {
   const [attempts, setAttempts] = useState(0);
   const [unlocked, setUnlocked] = useState(false);
 
-  // Check if this vault is already unlocked when component mounts
-  useEffect(() => {
-    if (keys[vaultId]) {
-      setUnlocked(true);
-    }
-  }, [keys, vaultId]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Don't do anything if already unlocked
-    if (unlocked) return;
     
     // Compare answers case insensitive
     if (answer.trim().toUpperCase() === correctAnswer.toUpperCase()) {
@@ -78,6 +68,11 @@ const Vault: React.FC<VaultProps> = ({ vaultId, question, correctAnswer }) => {
       ) : (
         <div className="flex flex-col h-full">
           <div className="flex-1 mb-4">
+            <div className="crt-border p-3 mb-4 bg-mac-black text-mac-white">
+              <h3 className="text-lg mb-2">Vault Question:</h3>
+              <p className="text-mac-white">{question}</p>
+            </div>
+            
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="answer" className="block mb-2">Enter your answer:</label>

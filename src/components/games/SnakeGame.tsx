@@ -19,7 +19,6 @@ const SnakeGame: React.FC = () => {
   
   const directionRef = useRef(direction);
   const intervalIdRef = useRef<number | null>(null);
-  const gameContainerRef = useRef<HTMLDivElement>(null);
   
   const generateFood = () => {
     const newFood = {
@@ -72,10 +71,6 @@ const SnakeGame: React.FC = () => {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!isPlaying) return;
     
-    // Stop event propagation to prevent window movement
-    e.preventDefault();
-    e.stopPropagation();
-    
     // Prevent reversing direction
     switch (e.key) {
       case 'ArrowUp':
@@ -126,44 +121,17 @@ const SnakeGame: React.FC = () => {
   const startGame = () => {
     resetGame();
     setIsPlaying(true);
-    
-    // Focus the game container
-    if (gameContainerRef.current) {
-      gameContainerRef.current.focus();
-    }
   };
 
   useEffect(() => {
-    const handleFocus = () => {
-      if (isPlaying && !gameOver && !isPaused) {
-        // Resume game when container is focused
-        if (intervalIdRef.current) {
-          clearInterval(intervalIdRef.current);
-        }
-        intervalIdRef.current = window.setInterval(moveSnake, GAME_SPEED);
-      }
-    };
-    
-    // Add a keyboard event listener to the game container
-    const gameContainer = gameContainerRef.current;
-    if (gameContainer) {
-      gameContainer.addEventListener('keydown', handleKeyDown);
-      gameContainer.addEventListener('focus', handleFocus);
-      
-      // Make the container focusable
-      gameContainer.setAttribute('tabIndex', '0');
-    }
-    
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      if (gameContainer) {
-        gameContainer.removeEventListener('keydown', handleKeyDown);
-        gameContainer.removeEventListener('focus', handleFocus);
-      }
+      window.removeEventListener('keydown', handleKeyDown);
       if (intervalIdRef.current) {
         clearInterval(intervalIdRef.current);
       }
     };
-  }, [isPlaying, gameOver, isPaused]);
+  }, []);
 
   useEffect(() => {
     if (isPlaying && !gameOver && !isPaused) {
@@ -171,11 +139,6 @@ const SnakeGame: React.FC = () => {
         clearInterval(intervalIdRef.current);
       }
       intervalIdRef.current = window.setInterval(moveSnake, GAME_SPEED);
-      
-      // Focus the game container
-      if (gameContainerRef.current) {
-        gameContainerRef.current.focus();
-      }
     } else if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current);
       intervalIdRef.current = null;
@@ -194,8 +157,7 @@ const SnakeGame: React.FC = () => {
       <div className="mb-2">Score: {score}</div>
       
       <div 
-        ref={gameContainerRef}
-        className="crt-border focus:outline-none focus:ring-2 focus:ring-mac-blue" 
+        className="crt-border" 
         style={{ 
           width: GRID_SIZE * CELL_SIZE, 
           height: GRID_SIZE * CELL_SIZE,
@@ -203,7 +165,6 @@ const SnakeGame: React.FC = () => {
           backgroundColor: '#222',
           overflow: 'hidden'
         }}
-        tabIndex={0}
       >
         {!isPlaying && !gameOver && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10">
@@ -283,7 +244,7 @@ const SnakeGame: React.FC = () => {
         </button>
       </div>
       <div className="mt-2 text-xs">
-        Use arrow keys to control. Click the game area first, then press keys.
+        Use arrow keys to control. Press Space to pause.
       </div>
     </div>
   );

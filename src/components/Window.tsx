@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect, ReactNode } from 'react';
 import { useDesktop, WindowType } from '../contexts/DesktopContext';
 import Vault from './Vault';
@@ -108,7 +109,6 @@ const Window: React.FC<WindowProps> = ({
                 <h3 className="text-xl mb-2">Vault #1</h3>
                 <p className="mb-4">To unlock this vault, answer the question:</p>
                 <p className="mb-2 font-bold">"Where did we confess?"</p>
-                <Vault vaultId="vault1" question="Where did we confess?" correctAnswer="ZOO" />
               </div>
             </div>
           </div>
